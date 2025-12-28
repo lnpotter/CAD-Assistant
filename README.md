@@ -54,11 +54,10 @@ The C# plugin parses this JSON and applies the requested transformations using A
 ## Configuration
 
 Inside `Plugin.cs` you will find:
-
+```cs
 private static readonly string ApiUrl = "https://api.perplexity.ai/chat/completions";
-private static readonly string ApiKey = "YOUR_API_KEY_HERE";
 private static readonly string Model = "sonar";
-
+```
 
 Before using the plugin:
 
