@@ -1,4 +1,4 @@
-name: Build AutoCAD plugin
+name: Package CADAssistant plugin
 
 on:
   push:
@@ -7,34 +7,21 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  package:
     runs-on: windows-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '8.0.x'
-
-      - name: Restore
-        run: dotnet restore CADAssistant/CADAssistant.csproj
-
-      - name: Build Release
-        run: dotnet build CADAssistant/CADAssistant.csproj -c Release --no-restore
-
       - name: Create plugin zip
         run: |
-          mkdir artifacts
-          copy CADAssistant\bin\Debug\net8.0\CADAssistant.dll artifacts\
-          if exist CADAssistant.bundle (
-            powershell Compress-Archive -Path CADAssistant.bundle\* -DestinationPath artifacts\CADAssistant.bundle.zip
+          if not exist dist (
+            echo "dist folder not found" && exit /b 1
           )
-          powershell Compress-Archive -Path artifacts\* -DestinationPath CADAssistant-plugin.zip
+          powershell Compress-Archive -Path dist\* -DestinationPath CADAssistant-plugin.zip
 
-      - name: Upload build artifact
+      - name: Upload plugin artifact
         uses: actions/upload-artifact@v4
         with:
           name: CADAssistant-plugin
