@@ -15,11 +15,14 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Create plugin zip
+        shell: pwsh
         run: |
-          if not exist dist (
-            echo "dist folder not found" && exit /b 1
-          )
-          powershell Compress-Archive -Path dist\* -DestinationPath CADAssistant-plugin.zip
+          if (-not (Test-Path "dist")) {
+            Write-Error "dist folder not found"
+            exit 1
+          }
+
+          Compress-Archive -Path "dist/*" -DestinationPath "CADAssistant-plugin.zip" -Force
 
       - name: Upload plugin artifact
         uses: actions/upload-artifact@v4
