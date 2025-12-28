@@ -53,16 +53,46 @@ The C# plugin parses this JSON and applies the requested transformations using A
 
 ## Configuration
 
-Inside `Plugin.cs` you will find:
-```cs
-private static readonly string ApiUrl = "https://api.perplexity.ai/chat/completions";
-private static readonly string Model = "sonar";
-```
+The AutoCAD plugin uses the Perplexity `pplx-api` to generate chat responses and drawing plans.  
+You must configure an API key **before** running any `AI_*` commands.
 
+There are two supported ways to provide the key:
+
+### 1. `appsettings.local.json` next to the DLL (recommended)
+
+Create a file named `appsettings.local.json` in the same folder as `CADAssistant.dll`  
+(for example, inside your `.bundle` `Contents` folder or the build `bin\Debug\net8.0` folder).
+```json
+{
+  "Perplexity": {
+    "ApiKey": "pplx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  }
+}
+```
+Notes:
+- The plugin looks for this file in the directory of the loaded `CADAssistant.dll`, **not** in the AutoCAD executable directory.
+- The key must be a valid Perplexity API key (usually starts with `pplx-`).
+
+### 2. `PPLX_API_KEY` environment variable
+
+As an alternative, you can set the key as an environment variable on Windows:
 Before using the plugin:
 
 1. Replace `YOUR_API_KEY_HERE` with your own Perplexity API key.  
 2. Rebuild the project and reload the plugin in AutoCAD.
+```shell
+setx PPLX_API_KEY "pplx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+```
+
+After setting it, restart AutoCAD so the new environment variable is visible to the process.
+
+The plugin resolution order is:
+
+1. Try to read `Perplexity.ApiKey` from `appsettings.local.json` next to `CADAssistant.dll`.
+2. If not found, read the `PPLX_API_KEY` environment variable.
+3. If neither is set, the plugin throws:
+
+> Perplexity API key not configured. Create appsettings.local.json with Perplexity.ApiKey next to CADAssistant.dll or set the PPLX_API_KEY environment variable.
 
 ---
 
