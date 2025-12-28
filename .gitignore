@@ -1,0 +1,37 @@
+# ---- Build artifacts ----
+bin/
+obj/
+[Bb]uild/
+[Ll]og/
+[Tt]est[Rr]esult*/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+
+# ---- Visual Studio / IDE ----
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# ---- NuGet ----
+packages/
+*.nupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ---- AutoCAD / temp ----
+~$*
+*.bak
+*.tmp
+
+# ---- Local config
+appsettings.local.json
+
+# ---- Useless ----
+*.log
+*.db
+*.cache

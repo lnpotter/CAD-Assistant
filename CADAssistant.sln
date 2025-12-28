@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36804.6
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CADAssistant", "CADAssistant\CADAssistant.csproj", "{804BDB25-14C3-6AFC-B4F2-5840D69A37A7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{804BDB25-14C3-6AFC-B4F2-5840D69A37A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{804BDB25-14C3-6AFC-B4F2-5840D69A37A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{804BDB25-14C3-6AFC-B4F2-5840D69A37A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{804BDB25-14C3-6AFC-B4F2-5840D69A37A7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D8EE6005-6E80-4DB4-9336-F162E5CE5A59}
+	EndGlobalSection
+EndGlobal
