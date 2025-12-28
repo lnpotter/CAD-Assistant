@@ -1,0 +1,31 @@
+name: Package CADAssistant plugin
+
+on:
+  push:
+    branches:
+      - ci-autocad
+  workflow_dispatch:
+
+jobs:
+  package:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create plugin zip
+        shell: pwsh
+        run: |
+          if (-not (Test-Path "dist")) {
+            Write-Error "dist folder not found"
+            exit 1
+          }
+
+          Compress-Archive -Path "dist/*" -DestinationPath "CADAssistant-plugin.zip" -Force
+
+      - name: Upload plugin artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: CADAssistant-plugin
+          path: CADAssistant-plugin.zip
